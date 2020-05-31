@@ -21,8 +21,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.dsl.module
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.KoinTestRule
+import org.koin.test.inject
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -44,11 +46,16 @@ class AppViewModelTest : AutoCloseKoinTest() {
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
+    private val viewModel: AppViewModel by inject()
+
     @get:Rule
     val koinTestRule = KoinTestRule.create {
         modules(
             listOf(
-                myModule
+                myModule,
+                module(override = true) {
+                    single { service }
+                }
             )
         )
     }
@@ -71,7 +78,6 @@ class AppViewModelTest : AutoCloseKoinTest() {
         service.stub {
             onBlocking { getPosts() }.doReturn(posts)
         }
-        val viewModel = AppViewModel(service)
 
         viewModel.postState.observeForever(postStateObserver)
 
@@ -84,7 +90,6 @@ class AppViewModelTest : AutoCloseKoinTest() {
         service.stub {
             onBlocking { getComments(1) }.doReturn(comments)
         }
-        val viewModel = AppViewModel(service)
 
         viewModel.getComments(1)
 
@@ -102,7 +107,6 @@ class AppViewModelTest : AutoCloseKoinTest() {
         service.stub {
             onBlocking { getComments(1) }.doReturn(comments)
         }
-        val viewModel = AppViewModel(service)
 
         viewModel.getComments(1)
 
