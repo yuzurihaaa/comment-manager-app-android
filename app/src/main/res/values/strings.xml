@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">JetpackTryout</string>
+    <string name="error_fetching">Error Fetching Data</string>
+    <string name="please_check">Please check your network</string>
+    <string name="search_by">Search by name, email or body</string>
+    <string name="comments">comments</string>
+    <string name="from">From %1$s</string>
+</resources>

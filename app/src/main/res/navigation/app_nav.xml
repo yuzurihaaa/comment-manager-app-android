@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/posts">
+
+    <fragment
+        android:id="@+id/posts"
+        android:name="com.yuzuriha.jetpack.tryout.view.PostsFragment"
+        android:label="posts_fragment"
+        tools:layout="@layout/posts_fragment" >
+        <action
+            android:id="@+id/action_posts_to_comments"
+            app:destination="@id/comments"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/comments"
+        android:name="com.yuzuriha.jetpack.tryout.view.CommentsFragment"
+        android:label="comments_fragment"
+        tools:layout="@layout/comments_fragment" >
+        <argument
+            android:name="postItem"
+            app:argType="com.yuzuriha.jetpack.tryout.model.PostItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>
